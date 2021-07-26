@@ -64,6 +64,10 @@ export default class UI {
     }
 
     static addBook() {
+        if(Storage.getLibrary().contains(data.getBookData().title)){
+            alert('Book already exist.');
+            UI.clearAddBookForm();
+        }
         if (Validate()) {
             const book = new Book(data.getBookData().title,
                 data.getBookData().author,

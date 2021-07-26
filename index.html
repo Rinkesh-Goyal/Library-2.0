@@ -68,14 +68,14 @@
           </form>
           <div class="mx-2">
             <button
-              class="btn btn-primary"
+              class="btn btn-primary login-btn"
               data-bs-toggle="modal"
               data-bs-target="#loginModal"
             >
               Login
             </button>
             <button
-              class="btn btn-warning"
+              class="btn btn-warning signup-btn"
               data-bs-toggle="modal"
               data-bs-target="#signupModal"
             >
@@ -111,33 +111,30 @@
                 <label for="exampleInputEmail1">Email address</label>
                 <input
                   type="email"
-                  class="form-control"
+                  class="form-control login-email"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
                 <small id="emailHelp" class="form-text text-muted"
                   >We'll never share your email with anyone else.</small
                 >
+                <small id="textHelp" class="form-text text-danger login-email-err-msg login-err-msg"
+                  >Email is required.</small
+                >
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input
                   type="password"
-                  class="form-control"
+                  class="form-control login-password"
                   id="exampleInputPassword1"
                 />
-              </div>
-              <div class="form-group form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label class="form-check-label" for="exampleCheck1"
-                  >Check me out</label
+                <small id="textHelp" class="form-text text-danger login-password-err-msg login-err-msg"
+                  >Password is required.</small
                 >
               </div>
-              <button type="submit" class="btn btn-primary">Login</button>
+              
+              <button type="button" class="btn btn-primary login-modal-btn my-4">Login</button>
             </form>
           </div>
           <div class="modal-footer">
@@ -165,7 +162,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="signupModalLabel">
-              Get an iCoder Account
+              Get an Account
             </h5>
             <button
               type="button"
@@ -180,41 +177,40 @@
                 <label for="exampleInputEmail1">Email address</label>
                 <input
                   type="email"
-                  class="form-control"
+                  class="form-control email"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
                 <small id="emailHelp" class="form-text text-muted"
                   >We'll never share your email with anyone else.</small
                 >
+                <small id="textHelp" class="form-text text-danger email-err-msg err-msg"
+                  >Email is required.</small
+                >
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input
                   type="password"
-                  class="form-control"
+                  class="form-control password"
                   id="exampleInputPassword1"
                 />
+                <small id="textHelp" class="form-text text-danger password-err-msg err-msg"
+                  >Password is required.</small
+                >
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Confirm Password</label>
                 <input
                   type="password"
-                  class="form-control"
+                  class="form-control confirm-password"
                   id="exampleInputPassword1"
                 />
-              </div>
-              <div class="form-group form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label class="form-check-label" for="exampleCheck1"
-                  >Check me out</label
+                <small id="textHelp" class="form-text text-danger c-password-err-msg err-msg"
+                  >Confirm Password is required.</small
                 >
               </div>
-              <button type="submit" class="btn btn-primary">SignUp</button>
+              <button type="button" class="btn btn-primary signup-modal-btn my-4">SignUp</button>
             </form>
           </div>
           <div class="modal-footer">
