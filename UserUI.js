@@ -95,7 +95,11 @@ export default class UserUI {
 
             const email = emailElement.value;
             const password = passwordElement.value;
-            if (UserUI.verifyUser()) {
+            if(!UserStorage.getUsers().contains(email)){
+                alert('User doesnot exist.')
+                UserUI.clearLoginForm();
+            }
+            else if (UserUI.verifyUser()) {
                 const user = UserStorage.findUserFromStorage(email);
                 if (user.password === password) {
                     console.log(user);
