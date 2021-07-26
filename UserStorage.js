@@ -13,7 +13,7 @@ export default class UserStorage{
           );
       
           users.setUsers(
-            library
+            users
               .getUsers()
               .map((user) => Object.assign(new UserData(), user)),
           );
