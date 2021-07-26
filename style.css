@@ -2,7 +2,10 @@
 .form-group .author-err-msg,
 .form-group .status-err-msg,
 .form-group .pages-err-msg,
-.form-group .genre-err-msg{
+.form-group .genre-err-msg,
+.form-group .email-err-msg,
+.form-group .password-err-msg,
+.form-group .c-password-err-msg{
     display: none;
 }
 
