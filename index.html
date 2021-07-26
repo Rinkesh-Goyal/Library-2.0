@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://www.flaticon.com/svg/static/icons/svg/1164/1164682.svg"
+    />
+
+    <title>Library</title>
+  </head>
+  <body>
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand fs-2" href="#">Library</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul
+            class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+            style="--bs-scroll-height: 100px"
+          >
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+          <div class="mx-2">
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Login
+            </button>
+            <button
+              class="btn btn-warning"
+              data-bs-toggle="modal"
+              data-bs-target="#signupModal"
+            >
+              SignUp
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!--Login Modal -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Login</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                />
+                <small id="emailHelp" class="form-text text-muted"
+                  >We'll never share your email with anyone else.</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <div class="form-group form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="exampleCheck1"
+                />
+                <label class="form-check-label" for="exampleCheck1"
+                  >Check me out</label
+                >
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Signup Modal -->
+    <div
+      class="modal fade"
+      id="signupModal"
+      tabindex="-1"
+      aria-labelledby="signupModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="signupModalLabel">
+              Get an iCoder Account
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                />
+                <small id="emailHelp" class="form-text text-muted"
+                  >We'll never share your email with anyone else.</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Confirm Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <div class="form-group form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="exampleCheck1"
+                />
+                <label class="form-check-label" for="exampleCheck1"
+                  >Check me out</label
+                >
+              </div>
+              <button type="submit" class="btn btn-primary">SignUp</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Info Container  -->
+    <div class="container my-4 fs-3">
+      <div class="row ms-5">
+        <div class="col-md-3">Read : <span id="books-read"></span></div>
+        <div class="col-md-3">Unread : <span id="books-unread"></span></div>
+        <div class="col-md-3">Books : <span id="total-books"></span></div>
+        <div class="col-md-3">
+          <button
+            id="delete-all-btn"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteAllModal"
+          >
+            Delete All
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete All Books Modal -->
+    <div
+      class="modal fade"
+      id="deleteAllModal"
+      tabindex="-1"
+      aria-labelledby="deleteAllModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteAllModalLabel">Delete</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Do you really want to delete all books from library.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger delete-all"
+              data-bs-dismiss="modal"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Sort -->
+    <div class="container my-4">
+      <div class="row ms-5">
+        <div class="col-md-12 fs-4">
+          Sort :
+          <select name="sort" id="sort" class="border rounded no-gutters fs-5">
+            <option value="null" disabled selected>Select Criteria</option>
+            <option value="date">Date</option>
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+          </select>
+          <select
+            name="order"
+            id="order"
+            class="border rounded no-gutters fs-5"
+          >
+            <option value="asc">ASC</option>
+            <option value="desc">DESC</option>
+          </select>
+          <button
+            type="button"
+            id="sort-btn"
+            class="btn btn-outline-primary mb-1"
+            style="width: 5rem"
+          >
+            Sort
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Book List -->
+    <div class="container my-4">
+      <div class="row mb-2 ms-5" id="table-body"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <button
+        class="new-book"
+        data-bs-toggle="modal"
+        data-bs-target="#addBookModal"
+      >
+        <span class="material-icons md-48">add_circle</span>
+      </button>
+    </footer>
+
+    <!-- Add Book Modal -->
+    <div
+      class="modal fade"
+      id="addBookModal"
+      tabindex="-1"
+      aria-labelledby="addBookModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addBookModalLabel">Add New Book</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="b-title">Title*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="b-title"
+                  aria-describedby="textHelp"
+                />
+                <small id="textHelp" class="form-text text-danger title-err-msg"
+                  >Book title is required.</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="b-author">Author*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="b-author"
+                  aria-describedby="textHelp"
+                />
+                <small
+                  id="textHelp"
+                  class="form-text text-danger author-err-msg"
+                  >Book Author is required.</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="b-genre">Genre*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="b-genre"
+                  aria-describedby="textHelp"
+                />
+                <small id="textHelp" class="form-text text-danger genre-err-msg"
+                  >Book Genre is required.</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="b-nbr_of_pages">Pages*</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="b-nbr_of_pages"
+                  aria-describedby="textHelp"
+                />
+                <small id="textHelp" class="form-text text-danger pages-err-msg"
+                  >Book Pages is required.</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="b-read_status">Status*</label>
+                <select
+                  class="form-control"
+                  name="book-status"
+                  id="b-read_status"
+                >
+                  <option value="null" disabled selected>
+                    did you read this book?
+                  </option>
+                  <option value="Read">Read</option>
+                  <option value="Unread">Unread</option>
+                </select>
+                <small
+                  id="textHelp"
+                  class="form-text text-danger status-err-msg"
+                  >Book Status is required.</small
+                >
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary clear">Clear</button>
+            <button
+              type="button"
+              class="btn btn-outline-success add-book"
+              data-bs-dismiss="modal"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://kit.fontawesome.com/4c536a6bd5.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

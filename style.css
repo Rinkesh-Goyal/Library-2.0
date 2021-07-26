@@ -1,0 +1,37 @@
+.form-group .title-err-msg,
+.form-group .author-err-msg,
+.form-group .status-err-msg,
+.form-group .pages-err-msg,
+.form-group .genre-err-msg{
+    display: none;
+}
+
+
+
+
+
+.material-icons.md-48 { 
+    font-size: 48px;
+    color: #333375;
+}
+
+.new-book{
+  border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  outline: transparent;
+  background: none;
+  color: #fff;
+}
+.new-book {
+  transition: transform 0.25s, opacity 0.25s;
+}
+.new-book:hover{
+    cursor: pointer;
+    transform:rotate(90deg) scale(1.2);
+}
