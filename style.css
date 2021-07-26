@@ -5,7 +5,9 @@
 .form-group .genre-err-msg,
 .form-group .email-err-msg,
 .form-group .password-err-msg,
-.form-group .c-password-err-msg{
+.form-group .c-password-err-msg,
+.form-group .login-email-err-msg,
+.form-group .login-password-err-msg{
     display: none;
 }
 
