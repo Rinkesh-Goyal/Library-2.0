@@ -10,6 +10,7 @@ export default class UserUI {
 
     static loadHomePage() {
         UserUI.initLoginSignupButton();
+        UserUI.initSort();
     }
 
     static initLoginSignupButton() {
@@ -129,15 +130,21 @@ export default class UserUI {
 
     static loadUserPage(email) {
         document.querySelector('.login-signup').innerHTML = email;
+        document.querySelector('.logout').style.display = 'flex';
         UserUI.initAddDeleteAllButton();
     }
 
     static initAddDeleteAllButton() {
-
+        document.querySelector('.logout').addEventListener('click', () => {
+            location.reload();
+        });
         document.querySelector('#delete-all-btn').addEventListener('click', () => {
             document.querySelector('.delete-all').addEventListener('click', () => {
                 const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
-                console.log(user.library.books);
+                user.library.books.splice(0);
+                UserStorage.deleteUserFromStorage(user.email);
+                UserStorage.addUserToStorage(user);
+                UserUI.loadBooks(user);
             })
         })
 
@@ -254,7 +261,6 @@ export default class UserUI {
     }
 
     static initBookButton() {
-        const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
         const deleteBookButton = document.querySelectorAll(".delete-button");
 
         deleteBookButton.forEach((button) => {
@@ -273,7 +279,7 @@ export default class UserUI {
         const statusButton = document.querySelectorAll('.status-button');
         statusButton.forEach((button) => {
             button.addEventListener('click', (event) => {
-                UserUI.changeStatus(event.target.id, event.target.innerHTML);                
+                UserUI.changeStatus(event.target.id, event.target.innerHTML);
             })
         })
     }
@@ -300,6 +306,87 @@ export default class UserUI {
             UserUI.loadBooks(user);
 
         }
-
     }
+
+    static initSort() {
+        const criteriaElement = document.querySelector('#sort');
+        const orderElement = document.querySelector('#order');
+        let criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
+        let order = orderElement.options[orderElement.selectedIndex].value;
+
+        const sortButton = document.getElementById('sort-btn');
+
+        sortButton.addEventListener('click', () => {
+            const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
+            criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
+            order = orderElement.options[orderElement.selectedIndex].value;
+            const bookArray = user.library.books;
+
+            if (criteria === 'title' && order === 'asc') {
+                bookArray.sort((a, b) => {
+                    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                        return -1;
+                    }
+                    return 0
+                })
+                UserUI.clearBookList();
+                bookArray.forEach((book) => UserUI.createBook(book))
+                UserUI.displayLibraryInfo();
+            }
+            if (criteria === 'title' && order === 'desc') {
+                bookArray.sort((a, b) => {
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                        return -1;
+                    }
+                    return 0
+                })
+                UserUI.clearBookList();
+                bookArray.forEach((book) => UserUI.createBook(book))
+                UserUI.displayLibraryInfo();
+            }
+
+            if (criteria === 'author' && order === 'asc') {
+                bookArray.sort((a, b) => {
+                    if (a.author.toLowerCase() < b.author.toLowerCase()) {
+                        return -1;
+                    }
+                    return 0
+                })
+                UserUI.clearBookList();
+                bookArray.forEach((book) => UserUI.createBook(book))
+                UserUI.displayLibraryInfo();
+
+            }
+            if (criteria === 'author' && order === 'desc') {
+                bookArray.sort((a, b) => {
+                    if (a.author.toLowerCase() > b.author.toLowerCase()) {
+                        return -1;
+                    }
+                    return 0
+                })
+                UserUI.clearBookList();
+                bookArray.forEach((book) => UserUI.createBook(book))
+                UserUI.displayLibraryInfo();
+
+            }
+            if (criteria === 'date' && order === 'asc') {
+                bookArray.sort((a, b) => {
+                    return new Date(a.dateAdded) - new Date(b.dateAdded);
+                })
+                UserUI.clearBookList();
+                bookArray.forEach((book) => UserUI.createBook(book))
+                UserUI.displayLibraryInfo();
+
+            }
+            if (criteria === 'date' && order === 'desc') {
+                bookArray.sort((a, b) => {
+                    return new Date(b.dateAdded) - new Date(a.dateAdded);
+                })
+                UserUI.clearBookList();
+                bookArray.forEach((book) => UserUI.createBook(book))
+                UserUI.displayLibraryInfo();
+            }
+        })
+    }
+
 }

@@ -57,15 +57,11 @@
               <a class="nav-link" href="contact.html">Contact Us</a>
             </li>
           </ul>
-          <!-- <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-light" type="submit">Search</button>
-          </form> -->
+          <div class="logout">
+            <button class="btn btn-outline-warning" type="button">
+              Logout
+            </button>
+          </div>
           <div class="mx-2 login-signup text-light">
             <button
               class="btn btn-primary login-btn"
@@ -118,7 +114,13 @@
                 <small id="emailHelp" class="form-text text-muted"
                   >We'll never share your email with anyone else.</small
                 >
-                <small id="textHelp" class="form-text text-danger login-email-err-msg login-err-msg"
+                <small
+                  id="textHelp"
+                  class="
+                    form-text
+                    text-danger
+                    login-email-err-msg login-err-msg
+                  "
                   >Email is required.</small
                 >
               </div>
@@ -129,12 +131,24 @@
                   class="form-control login-password"
                   id="exampleInputPassword1"
                 />
-                <small id="textHelp" class="form-text text-danger login-password-err-msg login-err-msg"
+                <small
+                  id="textHelp"
+                  class="
+                    form-text
+                    text-danger
+                    login-password-err-msg login-err-msg
+                  "
                   >Password is required.</small
                 >
               </div>
-              
-              <button type="button" class="btn btn-primary login-modal-btn my-4" data-bs-dismiss="modal">Login</button>
+
+              <button
+                type="button"
+                class="btn btn-primary login-modal-btn my-4"
+                data-bs-dismiss="modal"
+              >
+                Login
+              </button>
             </form>
           </div>
           <div class="modal-footer">
@@ -161,9 +175,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="signupModalLabel">
-              Get an Account
-            </h5>
+            <h5 class="modal-title" id="signupModalLabel">Get an Account</h5>
             <button
               type="button"
               class="btn-close"
@@ -184,7 +196,9 @@
                 <small id="emailHelp" class="form-text text-muted"
                   >We'll never share your email with anyone else.</small
                 >
-                <small id="textHelp" class="form-text text-danger email-err-msg err-msg"
+                <small
+                  id="textHelp"
+                  class="form-text text-danger email-err-msg err-msg"
                   >Email is required.</small
                 >
               </div>
@@ -195,7 +209,9 @@
                   class="form-control password"
                   id="exampleInputPassword1"
                 />
-                <small id="textHelp" class="form-text text-danger password-err-msg err-msg"
+                <small
+                  id="textHelp"
+                  class="form-text text-danger password-err-msg err-msg"
                   >Password is required.</small
                 >
               </div>
@@ -206,11 +222,18 @@
                   class="form-control confirm-password"
                   id="exampleInputPassword1"
                 />
-                <small id="textHelp" class="form-text text-danger c-password-err-msg err-msg"
+                <small
+                  id="textHelp"
+                  class="form-text text-danger c-password-err-msg err-msg"
                   >Confirm Password is required.</small
                 >
               </div>
-              <button type="button" class="btn btn-primary signup-modal-btn my-4">SignUp</button>
+              <button
+                type="button"
+                class="btn btn-primary signup-modal-btn my-4"
+              >
+                SignUp
+              </button>
             </form>
           </div>
           <div class="modal-footer">
