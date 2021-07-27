@@ -129,15 +129,22 @@ export default class UserUI {
 
     static loadUserPage(email) {
         document.querySelector('.login-signup').innerHTML = email;
+        document.querySelector('.logout').style.display = 'flex';
         UserUI.initAddDeleteAllButton();
     }
 
     static initAddDeleteAllButton() {
-
+        document.querySelector('.logout').addEventListener('click', ()=>{
+            location.reload();
+        });
         document.querySelector('#delete-all-btn').addEventListener('click', () => {
             document.querySelector('.delete-all').addEventListener('click', () => {
                 const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
-                console.log(user.library.books);
+                // console.log(user.library.books);
+                user.library.books.splice(0);
+                UserStorage.deleteUserFromStorage(user.email);
+                UserStorage.addUserToStorage(user);
+                UserUI.loadBooks(user);
             })
         })
 
@@ -300,6 +307,5 @@ export default class UserUI {
             UserUI.loadBooks(user);
 
         }
-
     }
 }
