@@ -4,7 +4,6 @@ import UserStorage from './UserStorage.js';
 import Validate from './Validate.js';
 import Book from './Book.js'
 import * as data from './Data.js';
-// import UI from './UI.js';
 
 
 export default class UserUI {
@@ -113,7 +112,7 @@ export default class UserUI {
                         msg.style.display = 'none'
                     })
                     UserUI.loadUserPage(email);
-
+                    UserUI.loadBooks(user);
                 } else {
                     alert('Password or Email is incorrect.');
                     UserUI.clearLoginForm();
@@ -167,11 +166,10 @@ export default class UserUI {
                 data.getBookData().genre,
                 data.getBookData().status
             )
-            user.library.books.push(book);
-            UserStorage.updateLibrary(user);
+            UserStorage.updateLibrary(user, book);
 
             UserUI.clearAddBookForm();
-            // UserUI.loadBooks();
+            UserUI.loadBooks(user);
         }
     }
 
@@ -183,15 +181,125 @@ export default class UserUI {
         document.querySelector('#b-read_status').value = "null";
     }
 
-    // static loadBooks() {
-    //     UserUI.clearBookList();
-    //     Storage.getLibrary()
-    //         .getBooks()
-    //         .forEach((book) => UserUI.createBook(book));
-    //     UserUI.displayLibraryInfo();
-    // }
+    static loadBooks(user) {
+        UserUI.clearBookList();
+        user.library.books.forEach((book) => UserUI.createBook(book))
+        UserUI.displayLibraryInfo();
+    }
 
-    // static clearBookList() {
-    //     document.querySelector('#table-body').innerHTML = '';
-    // }
+    static clearBookList() {
+        document.querySelector('#table-body').innerHTML = '';
+    }
+
+    static createBook(book) {
+        const tableBody = document.getElementById('table-body');
+        let today = new Date(book.dateAdded);
+        let date = `${today.getDate()}`.padStart(2, '0');
+        let month = `${today.getMonth() + 1}`.padStart(2, '0');
+        let year = `${today.getFullYear()}`;
+        let fullDate = `${date}/${month}/${year}`;
+        tableBody.innerHTML += `
+        <div class="col-md-4">
+          <div
+            class="
+              row
+              no-gutters
+              border
+              rounded
+              overflow-hidden
+              flex-md-row
+              mb-5
+              shadow-sm
+              h-md-250
+              position-relative
+              w-75
+            "
+          >
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary">${book.genre}</strong>
+              <h3 class="mb-0">${book.title}</h3>
+              <div class="mb-1 text-muted">${fullDate}</div>
+              <h4 class="card-text mb-auto">${book.author}</h4>
+              <div class="card-btn my-4 d-flex justify-content-end">
+                <a href="#" class="btn btn-outline-primary status-button" id="${book.title}">${book.status}</a>
+                <a href="#" class="btn btn-outline-danger mx-1 delete-button" id="${book.title}">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        `
+
+
+        UserUI.initBookButton();
+        UserUI.displayLibraryInfo();
+
+    }
+
+    static displayLibraryInfo() {
+        const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
+        const booksUnread = document.querySelector('#books-unread');
+        const booksRead = document.querySelector('#books-read');
+        const totalBooks = document.querySelector('#total-books');
+        let booksReadCount = 0;
+        let booksUnReadCount = 0;
+
+        totalBooks.innerHTML = user.library.books.length;
+        user.library.books.forEach((book) => {
+            if (book.status === "Read") booksReadCount++;
+            else if (book.status === "Unread") booksUnReadCount++;
+        })
+
+        booksRead.innerHTML = booksReadCount;
+        booksUnread.innerHTML = booksUnReadCount;
+    }
+
+    static initBookButton() {
+        const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
+        const deleteBookButton = document.querySelectorAll(".delete-button");
+
+        deleteBookButton.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                if (confirm("Do you really want to delete the book.")) {
+                    UserUI.deleteBook(e.target.id);
+                }
+                else {
+                    return;
+                }
+            })
+        })
+
+
+        // Change book status Read/Unread
+        const statusButton = document.querySelectorAll('.status-button');
+        statusButton.forEach((button) => {
+            button.addEventListener('click', (event) => {
+                UserUI.changeStatus(event.target.id, event.target.innerHTML);                
+            })
+        })
+    }
+
+    static deleteBook(bookTitle) {
+        const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
+        UserStorage.deleteBookFromLibrary(user, bookTitle);
+        UserUI.loadBooks(user);
+    }
+
+    static changeStatus(bookTitle, status) {
+        const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
+        const index = user.library.books.findIndex((b) => b.title === bookTitle);
+        if (status === 'Read') {
+            user.library.books[index].status = 'Unread';
+            UserStorage.deleteUserFromStorage(user.email);
+            UserStorage.addUserToStorage(user);
+            UserUI.loadBooks(user);
+        }
+        else if (status === 'Unread') {
+            user.library.books[index].status = 'Read';
+            UserStorage.deleteUserFromStorage(user.email);
+            UserStorage.addUserToStorage(user);
+            UserUI.loadBooks(user);
+
+        }
+
+    }
 }
