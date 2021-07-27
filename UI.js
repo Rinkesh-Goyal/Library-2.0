@@ -179,51 +179,51 @@
 //     /*************************************************************************************************** */
 //     //Error---Think of a logic to sort the view and not the storage
 //     /*************************************************************************************************** */
-//     static initSort() {
-//         const criteriaElement = document.querySelector('#sort');
-//         const orderElement = document.querySelector('#order');
+    // static initSort() {
+    //     const criteriaElement = document.querySelector('#sort');
+    //     const orderElement = document.querySelector('#order');
 
-//         let criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
-//         let order = orderElement.options[orderElement.selectedIndex].value;
+    //     let criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
+    //     let order = orderElement.options[orderElement.selectedIndex].value;
 
-//         const sortButton = document.getElementById('sort-btn');
+    //     const sortButton = document.getElementById('sort-btn');
 
-//         sortButton.addEventListener('click', () => {
-//             criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
-//             order = orderElement.options[orderElement.selectedIndex].value;
-//             console.log(criteria);
-//             console.log(order);
-//             if (criteria === 'title' && order === 'asc') {
-//                 Storage.sortLibraryByTitleAsc();
-//                 UI.loadBooks();
-//             }
-//             if (criteria === 'title' && order === 'desc') {
-//                 Storage.sortLibraryByTitleDesc();
-//                 UI.loadBooks();
-//             }
+    //     sortButton.addEventListener('click', () => {
+    //         criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
+    //         order = orderElement.options[orderElement.selectedIndex].value;
+    //         console.log(criteria);
+    //         console.log(order);
+    //         if (criteria === 'title' && order === 'asc') {
+    //             Storage.sortLibraryByTitleAsc();
+    //             UI.loadBooks();
+    //         }
+    //         if (criteria === 'title' && order === 'desc') {
+    //             Storage.sortLibraryByTitleDesc();
+    //             UI.loadBooks();
+    //         }
 
-//             if (criteria === 'author' && order === 'asc') {
-//                 Storage.sortLibraryByAuthorAsc();
-//                 UI.loadBooks();
+    //         if (criteria === 'author' && order === 'asc') {
+    //             Storage.sortLibraryByAuthorAsc();
+    //             UI.loadBooks();
 
-//             }
-//             if (criteria === 'author' && order === 'desc') {
-//                 Storage.sortLibraryByAuthorDesc();
-//                 UI.loadBooks();
+    //         }
+    //         if (criteria === 'author' && order === 'desc') {
+    //             Storage.sortLibraryByAuthorDesc();
+    //             UI.loadBooks();
 
-//             }
-//             if (criteria === 'date' && order === 'asc') {
-//                 Storage.sortLibraryByDateAsc();
-//                 UI.loadBooks();
+    //         }
+    //         if (criteria === 'date' && order === 'asc') {
+    //             Storage.sortLibraryByDateAsc();
+    //             UI.loadBooks();
 
-//             }
-//             if (criteria === 'date' && order === 'desc') {
-//                 Storage.sortLibraryByDateDesc();
-//                 UI.loadBooks();
+    //         }
+    //         if (criteria === 'date' && order === 'desc') {
+    //             Storage.sortLibraryByDateDesc();
+    //             UI.loadBooks();
 
-//             }
-//         })
-//     }
+    //         }
+    //     })
+    // }
 //     /****************************************************************** */
 //     /****************************************************************** */
 
