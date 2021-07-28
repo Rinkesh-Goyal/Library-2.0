@@ -50,9 +50,17 @@ export default class UserStorage {
 
   }
 
-  // static changeBookStatus(user, bookTitle, status) {
-    
-  // }
+  static setPreviousUser(data){
+    localStorage.setItem('previousUser',data);
+  }
+
+  static getPreviousUser(){
+    return localStorage.getItem('previousUser');
+  }
+
+  static deletePreviousUser(){
+    localStorage.removeItem('previousUser');
+  }
 }
 
 
