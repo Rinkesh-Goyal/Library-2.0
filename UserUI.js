@@ -308,18 +308,20 @@ export default class UserUI {
         }
     }
 
-    static initSort() {
+    static initSort(){
+        document.querySelector('#sort').addEventListener('change', UserUI.sort);
+        document.querySelector('#order').addEventListener('change', UserUI.sort);
+    }
+
+    static sort() {
         const criteriaElement = document.querySelector('#sort');
         const orderElement = document.querySelector('#order');
-        let criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
-        let order = orderElement.options[orderElement.selectedIndex].value;
+        
 
-        const sortButton = document.getElementById('sort-btn');
-
-        sortButton.addEventListener('click', () => {
+        
             const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
-            criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
-            order = orderElement.options[orderElement.selectedIndex].value;
+            let criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
+            let order = orderElement.options[orderElement.selectedIndex].value;
             const bookArray = user.library.books;
 
             if (criteria === 'title' && order === 'asc') {
@@ -386,7 +388,6 @@ export default class UserUI {
                 bookArray.forEach((book) => UserUI.createBook(book))
                 UserUI.displayLibraryInfo();
             }
-        })
     }
 
 }
