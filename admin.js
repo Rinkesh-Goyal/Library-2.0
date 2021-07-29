@@ -7,7 +7,7 @@ import * as data from './Data.js';
 
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl)
+    return new bootstrap.Popover(popoverTriggerEl)
 })
 
 
@@ -19,9 +19,9 @@ document.querySelector('.logout').addEventListener('click', () => {
 // const users = UserStorage.getUsers().users;
 // console.log(users[0].library.books.length);
 
-const deleteAllUser = (()=>{
-    document.querySelector('#delete-all-user').addEventListener('click', ()=>{
-        document.querySelector('.delete-all').addEventListener('click', ()=>{
+const deleteAllUser = (() => {
+    document.querySelector('#delete-all-user').addEventListener('click', () => {
+        document.querySelector('.delete-all').addEventListener('click', () => {
             localStorage.clear();
             loadUser();
         })
@@ -40,12 +40,31 @@ function createTable(user, i) {
                     <td class = "pt-3">${user.library.books.length}</td>
                     <td class = "my-1">
                         <a href="#" class="btn btn-outline-danger delete-user-button" id="${user.email}">Delete</a>
-                            <button class="btn btn-outline-success view-user-button" type="button" style = "width:4.5em;" id="${user.email}" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">View</button>
+                        <a href="#" class="btn btn-outline-success view-user-button" style = "width:4.5em;" id="${user.email}" data-bs-toggle="modal"
+                        data-bs-target="#userInfoModal">View</a>
                     </td>
                 </tr>
     `
     initUserButton();
 }
+
+function userInfoModal(email){
+    const user = UserStorage.findUserFromStorage(email);
+    const modalHeader = document.querySelector('#userInfoModalLabel');
+    const dateElement = document.querySelector('.date-user-added');
+    const userBookList = document.querySelector('.user-book-list')
+
+    const bookstr = [];
+
+    user.library.books.forEach(book => {
+        bookstr.push(book.title);
+    })
+    bookstr.join(',  ');
+    modalHeader.innerHTML = user.email.split('@')[0].toUpperCase();
+    dateElement.innerHTML = user.dateAdded.substr(0,10);
+    userBookList.innerHTML = bookstr;
+}
+
 
 function loadUser() {
     clearTable();
@@ -71,14 +90,23 @@ function initUserButton() {
         })
 
     })
+
+    const viewButton = document.querySelectorAll('.view-user-button');
+
+    viewButton.forEach(button =>{
+        button.addEventListener('click',(e)=>{
+            userInfoModal(e.target.id);
+        })
+    })
+
 }
 
-function deleteUser(email){
+function deleteUser(email) {
     UserStorage.deleteUserFromStorage(email);
     loadUser();
-}   
+}
 
-function clearTable(){
+function clearTable() {
     document.querySelector('.user-table-body').innerHTML = '';
 }
 
