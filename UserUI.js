@@ -46,6 +46,7 @@ export default class UserUI {
             }
             if (validateUser()) {
                 document.querySelector('.signup-modal-btn').setAttribute('data-bs-dismiss', 'modal');
+                alert('User successfully signed up.')
                 document.querySelectorAll('.err-msg').forEach((msg) => {
                     msg.style.display = 'none'
                 })
@@ -109,7 +110,11 @@ export default class UserUI {
 
             const email = emailElement.value;
             const password = passwordElement.value;
-            if (!UserStorage.getUsers().contains(email)) {
+            
+            if(email === 'rinkesh.admin@library.com' && password === "admin@1234"){
+                UserUI.loadAdminPage();
+            }
+            else if (!UserStorage.getUsers().contains(email)) {
                 alert('User doesnot exist.')
                 UserUI.clearLoginForm();
             }
@@ -402,4 +407,7 @@ export default class UserUI {
         }
     }
 
+    static loadAdminPage(){
+        window.location.href = "./admin.html";
+    }
 }
