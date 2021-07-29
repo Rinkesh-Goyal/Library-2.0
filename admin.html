@@ -83,6 +83,28 @@
       </div>
     </div>
 
+    <!-- Search user -->
+    <div class="container my-4 w-75">
+      <div class="d-flex">
+        <input
+          class="form-control w-25 user-search-input"
+          list="datalistOptions"
+          id="exampleDataList"
+          placeholder="Type to search user..."
+        />
+        <button class="btn btn-outline-success mx-2 search-btn" type="button">
+          Search
+        </button>
+      </div>
+      <datalist id="datalistOptions" class="suggestions">
+        <!-- <option value="San Francisco"></option>
+        <option value="New York"></option>
+        <option value="Seattle"></option>
+        <option value="Los Angeles"></option>
+        <option value="Chicago"></option> -->
+      </datalist>
+    </div>
+
     <!-- Delete all user modal -->
     <div
       class="modal fade"
@@ -135,7 +157,10 @@
     >
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header text-black" style="background-color:#8c0073;">
+          <div
+            class="modal-header text-black"
+            style="background-color: #8c0073"
+          >
             <h5 class="modal-title" id="userInfoModalLabel">Delete</h5>
             <button
               type="button"
@@ -146,18 +171,19 @@
           </div>
           <div class="modal-body">
             <table>
-                <tr>
-                    <td class="fw-bold">
-                        SignUp date : <span class="date-user-added px-2 fw-normal"></span>
-                    </td>
-                    <!-- <td class="date-user-added px-2"></td> -->
-                </tr>
-                <tr>
-                    <td class="fw-bold">
-                        Books : <span class="user-book-list px-2 fw-normal"></span>
-                    </td>
-                    <!-- <td class="user-book-list px-2"></td> -->
-                </tr>
+              <tr>
+                <td class="fw-bold">
+                  SignUp date :
+                  <span class="date-user-added px-2 fw-normal"></span>
+                </td>
+                <!-- <td class="date-user-added px-2"></td> -->
+              </tr>
+              <tr>
+                <td class="fw-bold">
+                  Books : <span class="user-book-list px-2 fw-normal"></span>
+                </td>
+                <!-- <td class="user-book-list px-2"></td> -->
+              </tr>
             </table>
           </div>
           <div class="modal-footer">
