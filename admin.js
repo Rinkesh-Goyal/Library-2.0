@@ -5,19 +5,14 @@ import Validate from './Validate.js';
 import Book from './Book.js'
 import * as data from './Data.js';
 
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-    return new bootstrap.Popover(popoverTriggerEl)
-})
-
 
 document.querySelector('#users').textContent = UserStorage.getUsers().users.length;
 
 document.querySelector('.logout').addEventListener('click', () => {
     window.location.href = './index.html';
 })
-// const users = UserStorage.getUsers().users;
-// console.log(users[0].library.books.length);
+// const users = UserStorage.getUsers().users.;
+// console.log(users);
 
 const deleteAllUser = (() => {
     document.querySelector('#delete-all-user').addEventListener('click', () => {
@@ -109,4 +104,30 @@ function deleteUser(email) {
 function clearTable() {
     document.querySelector('.user-table-body').innerHTML = '';
 }
+
+const searchUser = ()=>{
+    const email = document.querySelector('.user-search-input').value;
+    const user = UserStorage.findUserFromStorage(email);
+    clearTable();
+    createTable(user,1);
+}
+
+const searchUserAutoComplete = (() =>{
+    const users = [];
+    UserStorage.getUsers().users.forEach(user => {
+        users.push(user.email);
+    })
+
+    document.querySelector('.user-search-input').addEventListener('input', (event)=>{
+        let userArray = [];
+        if(event.target.value){
+            userArray = users.filter(user => user.toLowerCase().includes(event.target.value));
+            userArray = userArray.map(user => `<option value="${user}"></option>`)
+        }
+        const html = !userArray.length ? '':userArray.join('');
+        document.querySelector('.suggestions').innerHTML = html;
+    })    
+    document.querySelector('.search-btn').addEventListener('click',searchUser);
+})();
+
 
