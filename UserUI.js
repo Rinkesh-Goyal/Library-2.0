@@ -7,10 +7,20 @@ import * as data from './Data.js';
 
 
 export default class UserUI {
-
     static loadHomePage() {
-        UserUI.initLoginSignupButton();
-        UserUI.initSort();
+        
+            if (UserStorage.getPreviousUser() !== null) {
+                const user = UserStorage.findUserFromStorage(UserStorage.getPreviousUser());
+                UserUI.loadUserPage(UserStorage.getPreviousUser());
+                UserUI.loadBooks(user);
+                UserUI.initSort();
+            }
+            else {
+                UserUI.initLoginSignupButton();
+                UserUI.initSort();
+            }
+
+
     }
 
     static initLoginSignupButton() {
@@ -36,6 +46,7 @@ export default class UserUI {
             }
             if (validateUser()) {
                 document.querySelector('.signup-modal-btn').setAttribute('data-bs-dismiss', 'modal');
+                alert('User successfully signed up.')
                 document.querySelectorAll('.err-msg').forEach((msg) => {
                     msg.style.display = 'none'
                 })
@@ -99,14 +110,19 @@ export default class UserUI {
 
             const email = emailElement.value;
             const password = passwordElement.value;
-            if (!UserStorage.getUsers().contains(email)) {
+            
+            if(email === 'rinkesh.admin@library.com' && password === "admin@1234"){
+                UserUI.loadAdminPage();
+            }
+            else if (!UserStorage.getUsers().contains(email)) {
                 alert('User doesnot exist.')
                 UserUI.clearLoginForm();
             }
             else if (UserUI.verifyUser()) {
                 const user = UserStorage.findUserFromStorage(email);
                 if (user.password === password) {
-                    console.log(user);
+                    UserStorage.setPreviousUser(email);
+                    // console.log(user);
                     UserUI.clearLoginForm();
                     alert('User successfully logged-in.');
                     document.querySelectorAll('.login-err-msg').forEach((msg) => {
@@ -136,6 +152,7 @@ export default class UserUI {
 
     static initAddDeleteAllButton() {
         document.querySelector('.logout').addEventListener('click', () => {
+            UserStorage.deletePreviousUser();
             location.reload();
         });
         document.querySelector('#delete-all-btn').addEventListener('click', () => {
@@ -309,84 +326,88 @@ export default class UserUI {
     }
 
     static initSort() {
-        const criteriaElement = document.querySelector('#sort');
-        const orderElement = document.querySelector('#order');
-        let criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
-        let order = orderElement.options[orderElement.selectedIndex].value;
-
-        const sortButton = document.getElementById('sort-btn');
-
-        sortButton.addEventListener('click', () => {
-            const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
-            criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
-            order = orderElement.options[orderElement.selectedIndex].value;
-            const bookArray = user.library.books;
-
-            if (criteria === 'title' && order === 'asc') {
-                bookArray.sort((a, b) => {
-                    if (a.title.toLowerCase() < b.title.toLowerCase()) {
-                        return -1;
-                    }
-                    return 0
-                })
-                UserUI.clearBookList();
-                bookArray.forEach((book) => UserUI.createBook(book))
-                UserUI.displayLibraryInfo();
-            }
-            if (criteria === 'title' && order === 'desc') {
-                bookArray.sort((a, b) => {
-                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
-                        return -1;
-                    }
-                    return 0
-                })
-                UserUI.clearBookList();
-                bookArray.forEach((book) => UserUI.createBook(book))
-                UserUI.displayLibraryInfo();
-            }
-
-            if (criteria === 'author' && order === 'asc') {
-                bookArray.sort((a, b) => {
-                    if (a.author.toLowerCase() < b.author.toLowerCase()) {
-                        return -1;
-                    }
-                    return 0
-                })
-                UserUI.clearBookList();
-                bookArray.forEach((book) => UserUI.createBook(book))
-                UserUI.displayLibraryInfo();
-
-            }
-            if (criteria === 'author' && order === 'desc') {
-                bookArray.sort((a, b) => {
-                    if (a.author.toLowerCase() > b.author.toLowerCase()) {
-                        return -1;
-                    }
-                    return 0
-                })
-                UserUI.clearBookList();
-                bookArray.forEach((book) => UserUI.createBook(book))
-                UserUI.displayLibraryInfo();
-
-            }
-            if (criteria === 'date' && order === 'asc') {
-                bookArray.sort((a, b) => {
-                    return new Date(a.dateAdded) - new Date(b.dateAdded);
-                })
-                UserUI.clearBookList();
-                bookArray.forEach((book) => UserUI.createBook(book))
-                UserUI.displayLibraryInfo();
-
-            }
-            if (criteria === 'date' && order === 'desc') {
-                bookArray.sort((a, b) => {
-                    return new Date(b.dateAdded) - new Date(a.dateAdded);
-                })
-                UserUI.clearBookList();
-                bookArray.forEach((book) => UserUI.createBook(book))
-                UserUI.displayLibraryInfo();
-            }
-        })
+        document.querySelector('#sort').addEventListener('change', UserUI.sort);
+        document.querySelector('#order').addEventListener('change', UserUI.sort);
     }
 
+    static sort() {
+        const criteriaElement = document.querySelector('#sort');
+        const orderElement = document.querySelector('#order');
+
+
+
+        const user = UserStorage.findUserFromStorage(document.querySelector('.login-signup').textContent);
+        let criteria = criteriaElement.options[criteriaElement.selectedIndex].value;
+        let order = orderElement.options[orderElement.selectedIndex].value;
+        const bookArray = user.library.books;
+
+        if (criteria === 'title' && order === 'asc') {
+            bookArray.sort((a, b) => {
+                if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                    return -1;
+                }
+                return 0
+            })
+            UserUI.clearBookList();
+            bookArray.forEach((book) => UserUI.createBook(book))
+            UserUI.displayLibraryInfo();
+        }
+        if (criteria === 'title' && order === 'desc') {
+            bookArray.sort((a, b) => {
+                if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                    return -1;
+                }
+                return 0
+            })
+            UserUI.clearBookList();
+            bookArray.forEach((book) => UserUI.createBook(book))
+            UserUI.displayLibraryInfo();
+        }
+
+        if (criteria === 'author' && order === 'asc') {
+            bookArray.sort((a, b) => {
+                if (a.author.toLowerCase() < b.author.toLowerCase()) {
+                    return -1;
+                }
+                return 0
+            })
+            UserUI.clearBookList();
+            bookArray.forEach((book) => UserUI.createBook(book))
+            UserUI.displayLibraryInfo();
+
+        }
+        if (criteria === 'author' && order === 'desc') {
+            bookArray.sort((a, b) => {
+                if (a.author.toLowerCase() > b.author.toLowerCase()) {
+                    return -1;
+                }
+                return 0
+            })
+            UserUI.clearBookList();
+            bookArray.forEach((book) => UserUI.createBook(book))
+            UserUI.displayLibraryInfo();
+
+        }
+        if (criteria === 'date' && order === 'asc') {
+            bookArray.sort((a, b) => {
+                return new Date(a.dateAdded) - new Date(b.dateAdded);
+            })
+            UserUI.clearBookList();
+            bookArray.forEach((book) => UserUI.createBook(book))
+            UserUI.displayLibraryInfo();
+
+        }
+        if (criteria === 'date' && order === 'desc') {
+            bookArray.sort((a, b) => {
+                return new Date(b.dateAdded) - new Date(a.dateAdded);
+            })
+            UserUI.clearBookList();
+            bookArray.forEach((book) => UserUI.createBook(book))
+            UserUI.displayLibraryInfo();
+        }
+    }
+
+    static loadAdminPage(){
+        window.location.href = "./admin.html";
+    }
 }
